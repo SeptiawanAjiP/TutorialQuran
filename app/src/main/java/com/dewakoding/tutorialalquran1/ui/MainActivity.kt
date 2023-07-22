@@ -1,6 +1,9 @@
 package com.dewakoding.tutorialalquran1.ui
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.dewakoding.tutorialalquran1.databinding.ActivityMainBinding
 import com.dewakoding.tutorialalquran1.entity.Surah
@@ -39,6 +42,12 @@ class MainActivity: AppCompatActivity() {
     }
 
     fun setAdapter(surahs: List<Surah>?) {
-        binding.rvMain.adapter = SurahAdapter(surahs!!)
+        binding.rvMain.adapter = SurahAdapter(surahs!!, object: RecyclerViewClickListener {
+            override fun onItemClicked(view: View, surah: Surah) {
+                val intent = Intent(applicationContext, DetailSurahActivity::class.java)
+
+                startActivity(intent)
+            }
+        })
     }
 }

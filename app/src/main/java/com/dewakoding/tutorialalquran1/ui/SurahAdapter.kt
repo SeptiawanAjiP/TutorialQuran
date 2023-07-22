@@ -15,7 +15,7 @@ email : septiawanajipradana@gmail.com
 at : 14/07/23 - 14.34
 
  **/
-class SurahAdapter(val surahs: List<Surah>): RecyclerView.Adapter<SurahAdapter.ViewHolder>() {
+class SurahAdapter(val surahs: List<Surah>, val listener: RecyclerViewClickListener): RecyclerView.Adapter<SurahAdapter.ViewHolder>() {
     class ViewHolder(val binding: ItemSurahBinding): RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -30,6 +30,9 @@ class SurahAdapter(val surahs: List<Surah>): RecyclerView.Adapter<SurahAdapter.V
         holder.binding.titleSurah.text = surah.latin
         holder.binding.tvArtiDanJumlah.text = "${surah.translation} - ${surah.numAyah} ayat"
         holder.binding.tvArabic.text = surah.arabic
+        holder.binding.root.setOnClickListener {
+            listener?.onItemClicked(it, surah)
+        }
 
     }
 
